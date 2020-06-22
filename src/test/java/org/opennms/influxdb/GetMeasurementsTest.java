@@ -29,7 +29,14 @@ import com.influxdb.query.FluxTable;
 import okhttp3.OkHttpClient;
 
 
-public class InfluxdbClientTest {
+/**
+ * This test
+ * starts a docker container with influxdb
+ * writes 5 points
+ * loads the measurements and checks
+ * if we have 5 measurements.
+ */
+public class GetMeasurementsTest {
 
     private String configBucket = "opennms";
     private String configOrg = "opennms";
@@ -85,7 +92,7 @@ public class InfluxdbClientTest {
             addPoint(i);
         }
         influxDBClient.getWriteApi().flush();
-        Thread.sleep(1000); // wait for a bit to make sure data was saved.
+        Thread.sleep(2000); // wait for a bit to make sure data was saved.
 
         // load metrics
         List<String> measurements = loadAllMeasurements();
